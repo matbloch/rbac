@@ -13,7 +13,7 @@ use \Jf;
  */
 class Rbac
 {
-    public function __construct(PDO $db)
+    public function __construct($db)
     {
 
         require_once dirname(dirname(__DIR__)) . '/database/database.config';
