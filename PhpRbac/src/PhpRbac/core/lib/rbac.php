@@ -30,7 +30,17 @@ class JModel
 	protected function isMySql()
 	{
 		$Adapter=get_class(Jf::$Db);
-		return $Adapter == "mysqli" or ($Adapter == "PDO" and Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql");
+		
+		
+		if($Adapter == "mysqli"){
+			return true;
+		}elseif($Adapter == "PDO" && Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql"){
+			return true;
+		}elseif(get_parent_class(Jf::$Db) == "PDO" && Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql"){
+			return true;
+		}
+		
+		return false;
 	}
 }
 
