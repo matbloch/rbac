@@ -71,12 +71,27 @@ class Jf
 		if (count ( $args ) == 1)
 		{
 			$result = self::$Db->query ( $Query );
-			if ($result===false)
-				return null;
-			$res=$result->fetchAll ( PDO::FETCH_ASSOC );
-			if ($res===array())
-				return null;
-			return $res;
+			
+			$type = substr ( trim ( strtoupper ( $Query ) ), 0, 6 );
+			if ($type == "INSERT")
+			{
+				if ($result===false)
+					return null;
+				$res = self::$Db->lastInsertId ();
+				if ($res == 0)
+					return $result->rowCount ();
+				return $res;
+			}
+			elseif ($type == "DELETE" or $type == "UPDATE" or $type == "REPLAC")
+				return $result->rowCount ();
+			elseif ($type == "SELECT")
+			{
+				$res=$result->fetchAll ( PDO::FETCH_ASSOC );
+				if ($res===array())
+					return null;
+				else
+					return $res;
+			}
 		}
 		else
 		{
