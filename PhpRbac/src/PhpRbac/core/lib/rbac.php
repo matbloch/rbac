@@ -180,7 +180,7 @@ abstract class BaseRbac extends JModel
 		$Parts = explode ( "/", $Path );
 
 		$Adapter = get_class(Jf::$Db);
-		if ($Adapter == "mysqli" or ($Adapter == "PDO" and Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql")) {
+		if ($Adapter == "mysqli" or ($Adapter == "PDO" and Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql") or (get_parent_class(Jf::$Db) == "PDO" and Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="mysql")) {
 			$GroupConcat="GROUP_CONCAT(parent.Title ORDER BY parent.Lft SEPARATOR '/')";
 		} elseif ($Adapter == "PDO" and Jf::$Db->getAttribute(PDO::ATTR_DRIVER_NAME)=="sqlite") {
 			$GroupConcat="GROUP_CONCAT(parent.Title,'/')";
