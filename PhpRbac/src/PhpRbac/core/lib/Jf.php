@@ -43,7 +43,7 @@ class Jf
 	static function sql($Query)
 	{
 		$args = func_get_args ();
-		if (get_class ( self::$Db ) == "PDO")
+		if (get_class ( self::$Db ) == "PDO" || get_parent_class(self::$Db) == "PDO")
 			return call_user_func_array ( "self::sqlPdo", $args );
 		else
 			if (get_class ( self::$Db ) == "mysqli")
