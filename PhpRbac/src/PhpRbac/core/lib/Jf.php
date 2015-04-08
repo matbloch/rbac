@@ -204,4 +204,6 @@ class Jf
 
 Jf::setTablePrefix($tablePrefix);
 Jf::$Rbac=new RbacManager();
-require_once __DIR__."/../setup.php";
+
+
+//require_once __DIR__."/../setup.php";
